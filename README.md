@@ -27,6 +27,8 @@ Connect to the cluster (`bootstrap.servers`) as `IP:9092,IP:9093,IP:9094,IP:9095
 
 # Customize
 
+Please edit `.env` file
+
 | Var   |      Value      |  Default | Notes|
 |:----------|:-------------|:------:|:-----|
 | HOST |  IP Address for current machine |  | Please change to your IP|
