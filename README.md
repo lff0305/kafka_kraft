@@ -1,6 +1,9 @@
 # kafka_kraft
 a simple docker-compose example for kafka with kraft.
 
+# Requirement
+`docker` and `compose` plugin (`docker compose` command)
+
 This script will
 - download and build images for java runtime (17.0.7)
 - download and install the latest kafka (3.4.0)
