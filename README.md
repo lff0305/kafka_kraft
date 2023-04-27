@@ -1,5 +1,5 @@
 # kafka_kraft
-a simple docker-compose example for kafka with kraft.
+a simple docker-compose example for kafka with kraft (Without Zookeeper)
 
 # Requirement
 `docker` and `compose` plugin (`docker compose` command)
