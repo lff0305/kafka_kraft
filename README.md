@@ -14,3 +14,6 @@ export IMAGE=test_kafka
 cd build_image && ./build.sh $IMAGE && cd ..
 docker compose up -d
 ```
+
+# Customize
+If you need, update the `REPLICA` in `.env` file to 2 or 3 if more replica is needed than default replica (1)
