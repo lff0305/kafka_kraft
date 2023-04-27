@@ -1,0 +1,177 @@
+version: '3'
+services:
+  controller-0:
+    image: ${IMAGE}
+    environment:
+      BROKER_ID_COMMAND: "echo 0" 
+      KAFKA_ADVERTISED_HOST_NAME: controller-0
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_HOST_NAME: controller-0
+      KAFKA_LISTENERS: "CONTROLLER://0.0.0.0:9092"
+      KAFKA_LOG_DIRS: "/kafka/data"
+      CUSTOM_INIT_SCRIPT: "/init.sh"
+      STORAGE_ID: ${STORAGE_ID}
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: ${REPLICA}
+      KAFKA_LOG_RETENTION_BYTES: "1"
+      KAFKA_LOG_RETENTION_HOURS: "72"
+      KAFKA_PROCESS_ROLES: "controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "0@controller-0:9092,1@controller-1:9092,2@controller-2:9092"
+      KAFKA_JVM_PERFORMANCE_OPTS: "-XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:-OmitStackTraceInFastThrow  -Xlog:safepoint=info:file=/var/log/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Dnetworkaddress.cache.ttl=10 -Xms512m -Xmx512m -Xmn512m -Xss256k -XX:MaxDirectMemorySize=1024m -XX:MetaspaceSize=384m -XX:ReservedCodeCacheSize=256m -XX:+DisableExplicitGC -XX:+UseZGC -XX:GuaranteedSafepointInterval=0 -XX:+UseCountedLoopSafepoints -XX:+SafepointTimeout -XX:SafepointTimeoutDelay=1000 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED"
+    volumes:
+    - ./data/controller0:/kafka
+  controller-1:
+    image: ${IMAGE}
+    environment:
+      BROKER_ID_COMMAND: "echo 1" 
+      KAFKA_ADVERTISED_HOST_NAME: controller-1
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_HOST_NAME: controller-1
+      KAFKA_LISTENERS: "CONTROLLER://0.0.0.0:9092"
+      KAFKA_LOG_DIRS: "/kafka/data"
+      CUSTOM_INIT_SCRIPT: "/init.sh"
+      STORAGE_ID: ${STORAGE_ID}
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: ${REPLICA}
+      KAFKA_LOG_RETENTION_BYTES: "1"
+      KAFKA_LOG_RETENTION_HOURS: "72"
+      KAFKA_PROCESS_ROLES: "controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "0@controller-0:9092,1@controller-1:9092,2@controller-2:9092"
+      KAFKA_JVM_PERFORMANCE_OPTS: "-XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:-OmitStackTraceInFastThrow  -Xlog:safepoint=info:file=/var/log/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Dnetworkaddress.cache.ttl=10 -Xms512m -Xmx512m -Xmn512m -Xss256k -XX:MaxDirectMemorySize=1024m -XX:MetaspaceSize=384m -XX:ReservedCodeCacheSize=256m -XX:+DisableExplicitGC -XX:+UseZGC -XX:GuaranteedSafepointInterval=0 -XX:+UseCountedLoopSafepoints -XX:+SafepointTimeout -XX:SafepointTimeoutDelay=1000 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED"
+    volumes:
+    - ./data/controller1:/kafka
+  controller-2:
+    image: ${IMAGE}
+    environment:
+      BROKER_ID_COMMAND: "echo 2" 
+      KAFKA_ADVERTISED_HOST_NAME: controller-2
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_HOST_NAME: controller-2
+      KAFKA_LISTENERS: "CONTROLLER://0.0.0.0:9092"
+      KAFKA_LOG_DIRS: "/kafka/data"
+      CUSTOM_INIT_SCRIPT: "/init.sh"
+      STORAGE_ID: ${STORAGE_ID}
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: ${REPLICA}
+      KAFKA_LOG_RETENTION_BYTES: "1"
+      KAFKA_LOG_RETENTION_HOURS: "72"
+      KAFKA_PROCESS_ROLES: "controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "0@controller-0:9092,1@controller-1:9092,2@controller-2:9092"
+      KAFKA_JVM_PERFORMANCE_OPTS: "-XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:-OmitStackTraceInFastThrow  -Xlog:safepoint=info:file=/var/log/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Dnetworkaddress.cache.ttl=10 -Xms512m -Xmx512m -Xmn512m -Xss256k -XX:MaxDirectMemorySize=1024m -XX:MetaspaceSize=384m -XX:ReservedCodeCacheSize=256m -XX:+DisableExplicitGC -XX:+UseZGC -XX:GuaranteedSafepointInterval=0 -XX:+UseCountedLoopSafepoints -XX:+SafepointTimeout -XX:SafepointTimeoutDelay=1000 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED"
+    volumes:
+    - ./data/controller2:/kafka
+  broker-0:
+    image: ${IMAGE}
+    environment:
+      BROKER_ID_COMMAND: "echo 100" 
+      KAFKA_ADVERTISED_HOST_NAME: ${HOST}
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_HOST_NAME: broker-0
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${HOST}:9092
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092"
+      KAFKA_LOG_DIRS: "/kafka/data"
+      CUSTOM_INIT_SCRIPT: "/init.sh"
+      STORAGE_ID: ${STORAGE_ID}
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: ${REPLICA}
+      KAFKA_LOG_RETENTION_BYTES: "1"
+      KAFKA_LOG_RETENTION_HOURS: "72"
+      KAFKA_PROCESS_ROLES: "broker"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "0@controller-0:9092,1@controller-1:9092,2@controller-2:9092"
+      KAFKA_JVM_PERFORMANCE_OPTS: "-XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:-OmitStackTraceInFastThrow  -Xlog:safepoint=info:file=/var/log/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Dnetworkaddress.cache.ttl=10 -Xms512m -Xmx512m -Xmn512m -Xss256k -XX:MaxDirectMemorySize=1024m -XX:MetaspaceSize=384m -XX:ReservedCodeCacheSize=256m -XX:+DisableExplicitGC -XX:+UseZGC -XX:GuaranteedSafepointInterval=0 -XX:+UseCountedLoopSafepoints -XX:+SafepointTimeout -XX:SafepointTimeoutDelay=1000 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED"
+    ports:
+    - 9092:9092
+    volumes:
+    - ./data/broker0:/kafka
+  broker-1:
+    image: ${IMAGE}
+    environment:
+      BROKER_ID_COMMAND: "echo 101" 
+      KAFKA_ADVERTISED_HOST_NAME: ${HOST}
+      KAFKA_ADVERTISED_PORT: 9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${HOST}:9093
+      KAFKA_HOST_NAME: broker-1
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092"
+      KAFKA_LOG_DIRS: "/kafka/data"
+      CUSTOM_INIT_SCRIPT: "/init.sh"
+      STORAGE_ID: ${STORAGE_ID}
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: ${REPLICA}
+      KAFKA_LOG_RETENTION_BYTES: "1"
+      KAFKA_LOG_RETENTION_HOURS: "72"
+      KAFKA_PROCESS_ROLES: "broker"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "0@controller-0:9092,1@controller-1:9092,2@controller-2:9092"
+      KAFKA_JVM_PERFORMANCE_OPTS: "-XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:-OmitStackTraceInFastThrow  -Xlog:safepoint=info:file=/var/log/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Dnetworkaddress.cache.ttl=10 -Xms512m -Xmx512m -Xmn512m -Xss256k -XX:MaxDirectMemorySize=1024m -XX:MetaspaceSize=384m -XX:ReservedCodeCacheSize=256m -XX:+DisableExplicitGC -XX:+UseZGC -XX:GuaranteedSafepointInterval=0 -XX:+UseCountedLoopSafepoints -XX:+SafepointTimeout -XX:SafepointTimeoutDelay=1000 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED"
+    ports:
+    - 9093:9092
+    volumes:
+    - ./data/broker1:/kafka
+  broker-2:
+    image: ${IMAGE}
+    environment:
+      BROKER_ID_COMMAND: "echo 102" 
+      KAFKA_ADVERTISED_HOST_NAME: ${HOST}
+      KAFKA_ADVERTISED_PORT: 9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${HOST}:9094
+      KAFKA_HOST_NAME: broker-2
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092"
+      KAFKA_LOG_DIRS: "/kafka/data"
+      CUSTOM_INIT_SCRIPT: "/init.sh"
+      STORAGE_ID: ${STORAGE_ID}
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: ${REPLICA}
+      KAFKA_LOG_RETENTION_BYTES: "1"
+      KAFKA_LOG_RETENTION_HOURS: "72"
+      KAFKA_PROCESS_ROLES: "broker"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "0@controller-0:9092,1@controller-1:9092,2@controller-2:9092"
+      KAFKA_JVM_PERFORMANCE_OPTS: "-XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:-OmitStackTraceInFastThrow  -Xlog:safepoint=info:file=/var/log/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Dnetworkaddress.cache.ttl=10 -Xms512m -Xmx512m -Xmn512m -Xss256k -XX:MaxDirectMemorySize=1024m -XX:MetaspaceSize=384m -XX:ReservedCodeCacheSize=256m -XX:+DisableExplicitGC -XX:+UseZGC -XX:GuaranteedSafepointInterval=0 -XX:+UseCountedLoopSafepoints -XX:+SafepointTimeout -XX:SafepointTimeoutDelay=1000 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED"
+    ports:
+    - 9094:9092
+    volumes:
+    - ./data/broker2:/kafka
+  broker-3:
+    image: ${IMAGE}
+    environment:
+      BROKER_ID_COMMAND: "echo 103" 
+      KAFKA_ADVERTISED_HOST_NAME: ${HOST}
+      KAFKA_ADVERTISED_PORT: 9095
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${HOST}:9095
+      KAFKA_HOST_NAME: broker-3
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092"
+      KAFKA_LOG_DIRS: "/kafka/data"
+      CUSTOM_INIT_SCRIPT: "/init.sh"
+      STORAGE_ID: ${STORAGE_ID}
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: ${REPLICA}
+      KAFKA_LOG_RETENTION_BYTES: "1"
+      KAFKA_LOG_RETENTION_HOURS: "72"
+      KAFKA_PROCESS_ROLES: "broker"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "0@controller-0:9092,1@controller-1:9092,2@controller-2:9092"
+      KAFKA_JVM_PERFORMANCE_OPTS: "-XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:-OmitStackTraceInFastThrow  -Xlog:safepoint=info:file=/var/log/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Dnetworkaddress.cache.ttl=10 -Xms512m -Xmx512m -Xmn512m -Xss256k -XX:MaxDirectMemorySize=1024m -XX:MetaspaceSize=384m -XX:ReservedCodeCacheSize=256m -XX:+DisableExplicitGC -XX:+UseZGC -XX:GuaranteedSafepointInterval=0 -XX:+UseCountedLoopSafepoints -XX:+SafepointTimeout -XX:SafepointTimeoutDelay=1000 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED"
+    ports:
+    - 9095:9092
+    volumes:
+    - ./data/broker3:/kafka
+  broker-4:
+    image: ${IMAGE}
+    environment:
+      BROKER_ID_COMMAND: "echo 104" 
+      KAFKA_ADVERTISED_HOST_NAME: ${HOST}
+      KAFKA_ADVERTISED_PORT: 9096
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${HOST}:9096
+      KAFKA_HOST_NAME: broker-4
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092"
+      KAFKA_LOG_DIRS: "/kafka/data"
+      CUSTOM_INIT_SCRIPT: "/init.sh"
+      STORAGE_ID: ${STORAGE_ID}
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: ${REPLICA}
+      KAFKA_LOG_RETENTION_BYTES: "1"
+      KAFKA_LOG_RETENTION_HOURS: "72"
+      KAFKA_PROCESS_ROLES: "broker"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "0@controller-0:9092,1@controller-1:9092,2@controller-2:9092"
+      KAFKA_JVM_PERFORMANCE_OPTS: "-XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:-OmitStackTraceInFastThrow  -Xlog:safepoint=info:file=/var/log/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Dnetworkaddress.cache.ttl=10 -Xms512m -Xmx512m -Xmn512m -Xss256k -XX:MaxDirectMemorySize=1024m -XX:MetaspaceSize=384m -XX:ReservedCodeCacheSize=256m -XX:+DisableExplicitGC -XX:+UseZGC -XX:GuaranteedSafepointInterval=0 -XX:+UseCountedLoopSafepoints -XX:+SafepointTimeout -XX:SafepointTimeoutDelay=1000 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED"
+    ports:
+    - 9096:9092
+    volumes:
+    - ./data/broker4:/kafka
