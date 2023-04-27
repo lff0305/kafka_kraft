@@ -22,3 +22,6 @@ the `IMAGE` can be changed to other names if you like
 
 # Customize
 If you need, update the `REPLICA` in `.env` file to 2 or 3 if more replica is needed than default replica (1)
+
+# Thanks
+Most of the kafka docker scripts are from https://github.com/wurstmeister/kafka-docker
