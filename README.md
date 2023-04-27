@@ -5,8 +5,8 @@ a simple docker-compose example for kafka with kraft (Without Zookeeper)
 `docker` and `compose` plugin (`docker compose` command)
 
 This script will
-- download and build images for java runtime (17.0.7)
-- download and install the latest kafka (3.4.0)
+- download and build a base image for java runtime (17.0.7)
+- download and build the latest kafka (3.4.0) image on the java runtime image
 - setup a cluster with 3 controllers, 5 brokers
 
 # Usage:
