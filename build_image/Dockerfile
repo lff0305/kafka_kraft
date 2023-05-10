@@ -4,9 +4,23 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 ADD ./openjdk /opt/java/openjdk
 
-RUN apt update && apt install -y wget curl unzip sudo
+RUN apt update && apt install -y wget curl unzip sudo locales
 
-RUN groupadd -g 1000 tlgroup && useradd -u 1000 -g tlgroup tl &&     mkdir /logs &&     chgrp tlgroup /logs &&     chown tl logs &&     wget https://github.com/tianon/gosu/releases/download/1.12/gosu-amd64 &&     wget https://github.com/alibaba/arthas/releases/download/arthas-all-3.6.7/arthas-bin.zip &&     chmod +x /gosu-amd64 &&     mv /gosu-amd64 gosu &&     mkdir arthas &&     unzip arthas-bin.zip -d arthas &&     rm -rf arthas-bin.zip
+RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment \
+    && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    && echo "LANG=en_US.UTF-8" > /etc/locale.conf \
+    groupadd -g 1000 tlgroup \
+    && useradd -u 1000 -g tlgroup tl \
+    && mkdir /logs \
+    && chgrp tlgroup /logs \
+    && chown tl logs \
+    && wget https://github.com/tianon/gosu/releases/download/1.12/gosu-amd64 \
+    && wget https://github.com/alibaba/arthas/releases/download/arthas-all-3.6.7/arthas-bin.zip \
+    && chmod +x /gosu-amd64 \
+    && mv /gosu-amd64 gosu \
+    && mkdir arthas \
+    && unzip arthas-bin.zip -d arthas \
+    && rm -rf arthas-bin.zip
 
 ENV JAVA_HOME=/opt/java/openjdk \
     PATH="/opt/java/openjdk/bin:$PATH"
