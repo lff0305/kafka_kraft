@@ -9,12 +9,13 @@ RUN apt update && apt install -y wget curl unzip sudo locales
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment \
     && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
     && echo "LANG=en_US.UTF-8" > /etc/locale.conf \
-    groupadd -g 1000 tlgroup \
-    && useradd -u 1000 -g tlgroup tl \
+    && locale-gen en_US.UTF-8 \
+    && groupadd -g 1000 kafka \
+    && useradd -u 1000 -g kafka kafka \
     && mkdir /logs \
-    && chgrp tlgroup /logs \
-    && chown tl logs \
-    && wget https://github.com/tianon/gosu/releases/download/1.12/gosu-amd64 \
+    && chgrp kafka /logs \
+    && chown kafka logs \
+    && wget https://github.com/tianon/gosu/releases/download/1.16/gosu-amd64 \
     && wget https://github.com/alibaba/arthas/releases/download/arthas-all-3.6.7/arthas-bin.zip \
     && chmod +x /gosu-amd64 \
     && mv /gosu-amd64 gosu \
@@ -58,7 +59,13 @@ RUN apt update && apt install -y bash curl jq \
  && tar xfz /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt \
  && rm /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
  && ln -s /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME} \
- && rm /tmp/*
+ && rm /tmp/* \
+ && chgrp kafka -HR /opt/kafka \
+ && chown kafka -HR /opt/kafka \
+ && mkdir -p /kafka \
+ && chgrp -HR kafka /kafka \
+ && chown -HR kafka /kafka \
+ && cp /gosu /usr/bin/
 
 COPY overrides /opt/overrides
 
@@ -68,5 +75,6 @@ RUN chmod +x /init.sh
 
 VOLUME ["/kafka"]
 
+
 # Use "exec" form so that it runs as PID 1 (useful for graceful shutdown)
-CMD ["start-kafka.sh"]
+CMD ["gosu", "1000:1000",  "start-kafka.sh"]
