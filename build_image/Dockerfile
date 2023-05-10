@@ -59,6 +59,7 @@ RUN apt update && apt install -y bash curl jq \
  && tar xfz /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt \
  && rm /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
  && ln -s /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME} \
+ && mkdir -p /opt/kafka/logs \
  && rm /tmp/* \
  && chgrp kafka -HR /opt/kafka \
  && chown kafka -HR /opt/kafka \
@@ -68,13 +69,13 @@ RUN apt update && apt install -y bash curl jq \
  && cp /gosu /usr/bin/
 
 COPY overrides /opt/overrides
-
+COPY boot.sh /
 COPY init.sh /
 
-RUN chmod +x /init.sh
+RUN chmod +x /init.sh && chmod +x /boot.sh
 
 VOLUME ["/kafka"]
 
 
 # Use "exec" form so that it runs as PID 1 (useful for graceful shutdown)
-CMD ["gosu", "1000:1000",  "start-kafka.sh"]
+ENTRYPOINT ["/boot.sh"]
