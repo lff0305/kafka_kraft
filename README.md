@@ -11,7 +11,7 @@ This script will
 
 # Start cluster:
 
-- change the `HOST` variable in `.env` file to your IP Address for which this IP can be reached by other clients (**Note 1**)
+- change the `HOST` variable in `.env` file to your IP Address for which this IP can be reached by other clients (**1**)
 - Run script
 ```
 export IMAGE=test_kafka
@@ -23,7 +23,7 @@ the `IMAGE` can be changed to other names if you like
 
 # Clients/SDKs
 
-Connect to the cluster (`bootstrap.servers`) as `IP:9092,IP:9093,IP:9094,IP:9095,IP:9096`. The `IP` is the IP Address used in  (**Note 1**)
+Connect to the cluster (`bootstrap.servers`) as `IP:9092,IP:9093,IP:9094,IP:9095,IP:9096`. The `IP` is the IP Address used in  (**1**)
 
 # Customize
 
@@ -31,7 +31,7 @@ Please edit `.env` file
 
 | Var   |      Value      |  Default | Notes|
 |:----------|:-------------|:------:|:-----|
-| HOST |  IP Address for current machine |  | Please change to your IP|
+| HOST |  IP Address for current machine |  | **1** Please change to your IP|
 | REPLICA |    Kafka topic replica config   |  1 | 2 or 3 is better but should < PARTITIONS |
 | PARTITIONS | Kafka topic partitions config|    3 | |
 
