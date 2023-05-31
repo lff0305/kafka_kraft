@@ -34,6 +34,8 @@ Please edit `.env` file
 | HOST |  IP Address for current machine |  | **(1)** Please change to your IP|
 | REPLICA |    Kafka topic replica config   |  1 | 2 or 3 is better but should < PARTITIONS |
 | PARTITIONS | Kafka topic partitions config|    3 | |
-
+| LOG_SEGMENT_BYTES | Per log file segment limit | 32 MB | |
+| LOG_RETENTION_BYTES |Per topic all log files size limit | 256 MB | |
+| LOG_RETENTION_HOURS |Life before delete for per log segment | 72 hours | |
 # Thanks
 Most of the kafka docker scripts are from https://github.com/wurstmeister/kafka-docker
