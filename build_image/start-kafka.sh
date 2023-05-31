@@ -9,15 +9,6 @@ fi
 
 echo "checking log retention bytes"
 
-if [[ -z "${KAFKA_LOG_RETENTION_BYTES}" ]]; then
-  echo "KAFKA_LOG_RETENTION_BYTES is not defined."
-else
-  echo "KAFKA_LOG_RETENTION_BYTES is defined"
-  bytes=$(df -B1 | grep /kafka | awk '{printf("%d\n", $2 * 0.8)}')
-  echo "The bytes to use: $bytes"
-  export KAFKA_LOG_RETENTION_BYTES=$bytes
-fi
-
 # Allow specific kafka versions to perform any unique bootstrap operations
 OVERRIDE_FILE="/opt/overrides/${KAFKA_VERSION}.sh"
 if [[ -x "$OVERRIDE_FILE" ]]; then
