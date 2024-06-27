@@ -66,6 +66,11 @@ RUN apt update && apt install -y bash curl jq \
  && mkdir -p /kafka \
  && chgrp -HR kafka /kafka \
  && chown -HR kafka /kafka \
+ && mkdir -p /opt/kafka/logs \
+ && chgrp kafka /opt/kafka/logs \
+ && chown kafka /opt/kafka/logs \
+ && chgrp kafka /opt/kafka/logs \
+ && chown kafka /opt/kafka/logs \
  && cp /gosu /usr/bin/
 
 COPY overrides /opt/overrides
